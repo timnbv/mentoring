@@ -1,0 +1,515 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "0.1.0",
+        "title": "Mentoring portal"
+    },
+    "host": "localhost:8080",
+    "basePath": "/mentoringportal",
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/mentors": {
+            "get": {
+                "description": "Gets `Mentor` objects.\nOptional query param of **size** determines\nsize of returned array\n",
+                "parameters": [
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "description": "Size of array",
+                        "required": false,
+                        "type": "number",
+                        "format": "double"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "title": "Mentors",
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Mentor"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/errorModel"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Creates a new mentor. Email should be unique",
+                "operationId": "addMentor",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "mentor",
+                        "in": "body",
+                        "description": "Mentor to add",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NewPerson"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Mentor created",
+                        "schema": {
+                            "$ref": "#/definitions/Mentor"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/errorModel"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Updates mentor.",
+                "operationId": "updateMentor",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "mentor",
+                        "in": "body",
+                        "description": "Mentor to update",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdatePerson"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mentor updated",
+                        "schema": {
+                            "$ref": "#/definitions/Mentor"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/errorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/mentors/{id}": {
+            "get": {
+                "description": "Returns a mentor based on a single ID",
+                "operationId": "findMentorById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of mentor to fetch",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "mentor response",
+                        "schema": {
+                            "$ref": "#/definitions/Mentor"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/errorModel"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "deletes a single mentor based on the ID supplied",
+                "operationId": "deleteMentor",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of mentee to delete",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "mentor deleted"
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/errorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/mentees": {
+            "get": {
+                "description": "Gets `Mentee` objects.\nOptional query param of **size** determines\nsize of returned array\n",
+                "parameters": [
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "description": "Size of array",
+                        "required": false,
+                        "type": "number",
+                        "format": "double"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "title": "Mentees",
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Mentee"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/errorModel"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Creates a new mentee. Email should be unique",
+                "operationId": "addMentee",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "mentee",
+                        "in": "body",
+                        "description": "Mentee to add",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NewPerson"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Mentee created",
+                        "schema": {
+                            "$ref": "#/definitions/Mentee"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/errorModel"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Updates mentee.",
+                "operationId": "updateMentee",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "mentor",
+                        "in": "body",
+                        "description": "Mentee to update",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdatePerson"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mentee updated",
+                        "schema": {
+                            "$ref": "#/definitions/Mentee"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/errorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/mentees/{id}": {
+            "get": {
+                "description": "Returns a mentee based on a single ID",
+                "operationId": "findMenteeById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of mentee to fetch",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "mentee response",
+                        "schema": {
+                            "$ref": "#/definitions/Mentee"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/errorModel"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "deletes a single mentee based on the ID supplied",
+                "operationId": "deleteMentee",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of mentee to delete",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "mentee deleted"
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/errorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/mentors/{id}/mentee": {
+            "post": {
+                "description": "Links a mentee to a mentor.",
+                "operationId": "linkMenteeToMentor",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of mentor to add mentee",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "mentee",
+                        "in": "body",
+                        "description": "Mentee to add",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AddMentee"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Mentee added to mentor",
+                        "schema": {
+                            "$ref": "#/definitions/Mentor"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/errorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/mentors/{id}/mentee/{mentee_id}": {
+            "delete": {
+                "description": "unlinks mentee from mentor",
+                "operationId": "unlinkMenteeFromMentor",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of mentor to unlink",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "mentee_id",
+                        "in": "path",
+                        "description": "ID of mentee to unlink",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "mentee unlinked"
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/errorModel"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Mentor": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "fullname": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "mentees": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Mentee"
+                    }
+                }
+            }
+        },
+        "NewPerson": {
+            "type": "object",
+            "properties": {
+                "fullname": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
+        "UpdatePerson": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "fullname": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
+        "Mentee": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "fullname": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "AddMentee": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
+        "errorModel": {
+            "type": "object",
+            "required": [
+                "code",
+                "message"
+            ],
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
