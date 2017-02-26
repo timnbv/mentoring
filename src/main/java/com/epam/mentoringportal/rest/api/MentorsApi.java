@@ -1,10 +1,10 @@
-package com.epam.mentoringportal.restapi;
+package com.epam.mentoringportal.rest.api;
 
 import io.swagger.annotations.*;
-import com.epam.mentoringportal.model.AddMentee;
-import com.epam.mentoringportal.model.Mentor;
-import com.epam.mentoringportal.model.NewPerson;
-import com.epam.mentoringportal.model.UpdatePerson;
+import com.epam.mentoringportal.rest.dto.AddMentee;
+import com.epam.mentoringportal.rest.dto.Mentor;
+import com.epam.mentoringportal.rest.dto.NewPerson;
+import com.epam.mentoringportal.rest.dto.UpdatePerson;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
