@@ -63,4 +63,9 @@ public class MenteeServiceImpl implements MenteeService {
         MenteeEntity newMenteeEntity = menteeRepository.saveAndFlush(menteeEntity);
         return dtoMapper.map(newMenteeEntity, Mentee.class);
     }
+
+    @Override
+    public String returnString() {
+        return "RealObject";
+    }
 }

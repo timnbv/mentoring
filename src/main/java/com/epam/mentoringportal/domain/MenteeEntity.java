@@ -93,4 +93,25 @@ public class MenteeEntity {
     public MenteeEntity(){
 
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        MenteeEntity that = (MenteeEntity) o;
+
+        if (!id.equals(that.id)) return false;
+        if (!fullname.equals(that.fullname)) return false;
+        return email.equals(that.email);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + fullname.hashCode();
+        result = 31 * result + email.hashCode();
+        return result;
+    }
 }

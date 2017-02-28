@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+    <mentor id="1" fullname="ivan petrov" email="ivan_petrov@mail.com"/>
+    <mentor id="2" fullname="donald trump" email="donald_trump@usa.com"/>
+    <mentor id="3" fullname="barac obama" email="barak_obama@usa.com"/>
+    <mentor id="4" fullname="vladimir putin" email="vladimir_putin@kremlin.ru"/>
+</dataset>

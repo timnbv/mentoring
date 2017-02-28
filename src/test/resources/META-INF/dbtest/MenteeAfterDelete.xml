@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+    <mentee id="2" fullname="donald trump" email="donald_trump@usa.com"/>
+    <mentee id="3" fullname="barac obama" email="barak_obama@usa.com"/>
+    <mentee id="4" fullname="vladimir putin" email="vladimir_putin@kremlin.ru"/>
+</dataset>

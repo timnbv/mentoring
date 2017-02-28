@@ -22,16 +22,12 @@ import java.util.List;
 @Controller
 public class MenteesApiController implements MenteesApi {
 
-
-    private MenteeService menteeService;
-
     @Autowired
-    public MenteesApiController(MenteeService menteeService) {
-        this.menteeService = menteeService;
-    }
+    private MenteeService menteeService;
 
     public ResponseEntity<Mentee> addMentee(@ApiParam(value = "Mentee to add", required = true) @RequestBody NewPerson mentee) throws ApplicationException {
         Mentee newMentee = menteeService.save(mentee);
+        String str = menteeService.returnString();
         return new ResponseEntity<Mentee>(newMentee, HttpStatus.CREATED);
     }
 

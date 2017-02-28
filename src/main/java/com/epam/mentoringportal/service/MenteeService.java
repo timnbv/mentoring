@@ -18,4 +18,6 @@ public interface MenteeService {
     void delete(int id);
 
     Mentee update(Mentee mentee) throws ApplicationException;
+
+    String returnString();
 }
