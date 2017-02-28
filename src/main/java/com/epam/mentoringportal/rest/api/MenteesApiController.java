@@ -27,7 +27,9 @@ public class MenteesApiController implements MenteesApi {
 
     public ResponseEntity<Mentee> addMentee(@ApiParam(value = "Mentee to add", required = true) @RequestBody NewPerson mentee) throws ApplicationException {
         Mentee newMentee = menteeService.save(mentee);
+        System.out.println("New Mentee: " + newMentee);
         String str = menteeService.returnString();
+        System.out.println("Return String: " + str);
         return new ResponseEntity<Mentee>(newMentee, HttpStatus.CREATED);
     }
 
