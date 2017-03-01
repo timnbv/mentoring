@@ -1,5 +1,6 @@
 package com.epam.mentoringportal.rest.api;
 
+import com.epam.mentoringportal.service.ApplicationException;
 import io.swagger.annotations.*;
 import com.epam.mentoringportal.rest.dto.AddMentee;
 import com.epam.mentoringportal.rest.dto.Mentor;
@@ -22,7 +23,7 @@ public interface MentorsApi {
             produces = {"application/json"},
             consumes = {"application/json"},
             method = RequestMethod.POST)
-    ResponseEntity<Mentor> addMentor(@ApiParam(value = "Mentor to add", required = true) @RequestBody NewPerson mentor);
+    ResponseEntity<Mentor> addMentor(@ApiParam(value = "Mentor to add", required = true) @RequestBody NewPerson mentor) throws ApplicationException;
 
 
     @ApiOperation(value = "", notes = "deletes a single mentor based on the ID supplied", response = Void.class, tags = {})
@@ -30,7 +31,6 @@ public interface MentorsApi {
             @ApiResponse(code = 204, message = "mentor deleted", response = Void.class)})
     @RequestMapping(value = "/mentors/{id}",
             produces = {"application/json"},
-            consumes = {"application/json"},
             method = RequestMethod.DELETE)
     ResponseEntity<Void> deleteMentor(@ApiParam(value = "ID of mentee to delete", required = true) @PathVariable("id") Integer id);
 
@@ -40,7 +40,6 @@ public interface MentorsApi {
             @ApiResponse(code = 200, message = "mentor response", response = Mentor.class)})
     @RequestMapping(value = "/mentors/{id}",
             produces = {"application/json"},
-            consumes = {"application/json"},
             method = RequestMethod.GET)
     ResponseEntity<Mentor> findMentorById(@ApiParam(value = "ID of mentor to fetch", required = true) @PathVariable("id") Integer id);
 
@@ -53,7 +52,7 @@ public interface MentorsApi {
             consumes = {"application/json"},
             method = RequestMethod.POST)
     ResponseEntity<Mentor> linkMenteeToMentor(@ApiParam(value = "ID of mentor to add mentee", required = true) @PathVariable("id") Integer id,
-                                              @ApiParam(value = "Mentee to add", required = true) @RequestBody AddMentee mentee);
+                                              @ApiParam(value = "Mentee to add", required = true) @RequestBody AddMentee mentee) throws ApplicationException;
 
 
     @ApiOperation(value = "", notes = "Gets `Mentor` objects. Optional query param of **size** determines size of returned array ", response = Mentor.class, responseContainer = "List", tags = {})

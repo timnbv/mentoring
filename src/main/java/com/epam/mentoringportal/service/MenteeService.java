@@ -19,5 +19,4 @@ public interface MenteeService {
 
     Mentee update(Mentee mentee) throws ApplicationException;
 
-    String returnString();
 }

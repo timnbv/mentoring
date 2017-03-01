@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface MenteeRepository extends JpaRepository<MenteeEntity, Integer> {
+
+    MenteeEntity findByEmail(String email);
 }

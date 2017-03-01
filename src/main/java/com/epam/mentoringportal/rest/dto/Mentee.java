@@ -38,6 +38,9 @@ public class Mentee {
     }
 
     public Mentee(int id, String name, String email) {
+        this.id = id;
+        this.fullname = name;
+        this.email = email;
     }
 
     public Mentee id(Integer id) {

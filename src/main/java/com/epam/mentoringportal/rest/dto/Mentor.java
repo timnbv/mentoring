@@ -32,6 +32,11 @@ public class Mentor {
     @JsonProperty("mentees")
     private List<Mentee> mentees = new ArrayList<Mentee>();
 
+    public Mentor(String name, String email) {
+        this.fullname = name;
+        this.email = email;
+    }
+
     public Mentor id(Integer id) {
         this.id = id;
         return this;

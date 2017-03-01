@@ -4,6 +4,7 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,7 +26,7 @@ public class MentorEntity {
     String email = null;
 
     @OneToMany(cascade=CascadeType.ALL, mappedBy="mentor")
-    List<MenteeEntity> mentees;
+    List<MenteeEntity> mentees = new ArrayList<>();
 
 
     public List<MenteeEntity> getMentees() {

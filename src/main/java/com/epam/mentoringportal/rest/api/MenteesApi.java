@@ -29,10 +29,8 @@ public interface MenteesApi {
     @ApiResponses(value = {
             @ApiResponse(code = 204, message = "mentee deleted", response = Void.class)})
     @RequestMapping(value = "/mentees/{id}",
-            produces = {"application/json"},
-            consumes = {"application/json"},
             method = RequestMethod.DELETE)
-    ResponseEntity<Void> deleteMentee(@ApiParam(value = "ID of mentee to delete", required = true) @PathVariable("id") Integer id);
+    ResponseEntity<Void> deleteMentee(@ApiParam(value = "ID of mentee to delete", required = true) @PathVariable("id") Integer id) throws ApplicationException;
 
 
     @ApiOperation(value = "", notes = "Returns a mentee based on a single ID", response = Mentee.class, tags = {})
@@ -40,7 +38,6 @@ public interface MenteesApi {
             @ApiResponse(code = 200, message = "mentee response", response = Mentee.class)})
     @RequestMapping(value = "/mentees/{id}",
             produces = {"application/json"},
-            consumes = {"application/json"},
             method = RequestMethod.GET)
     ResponseEntity<Mentee> findMenteeById(@ApiParam(value = "ID of mentee to fetch", required = true) @PathVariable("id") Integer id);
 

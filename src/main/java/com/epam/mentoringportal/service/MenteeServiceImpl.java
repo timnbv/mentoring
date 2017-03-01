@@ -8,8 +8,8 @@ import org.joda.time.DateTime;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,13 +38,18 @@ public class MenteeServiceImpl implements MenteeService {
     @Override
     public Mentee findById(int id) {
         MenteeEntity one = menteeRepository.findOne(id);
-        return dtoMapper.map(one, Mentee.class);
+        return one == null ? null: dtoMapper.map(one, Mentee.class);
     }
 
     @Override
-    public Mentee save(NewPerson newMentee) {
-        //TODO Exception handling
+    public Mentee save(NewPerson newMentee) throws ApplicationException {
+
         MenteeEntity mentee = dtoMapper.map(newMentee, MenteeEntity.class);
+        MenteeEntity exists = menteeRepository.findByEmail(mentee.getEmail());
+        if (exists != null) {
+            throw new ApplicationException("Mentee with such email already exists");
+        }
+
         mentee.setCreatedAt(new DateTime());
         mentee.setUpdatedAt(new DateTime());
         MenteeEntity newMenteeEntity = menteeRepository.saveAndFlush(mentee);
@@ -62,10 +67,5 @@ public class MenteeServiceImpl implements MenteeService {
         menteeEntity.setUpdatedAt(new DateTime());
         MenteeEntity newMenteeEntity = menteeRepository.saveAndFlush(menteeEntity);
         return dtoMapper.map(newMenteeEntity, Mentee.class);
-    }
-
-    @Override
-    public String returnString() {
-        return "RealObject";
     }
 }
